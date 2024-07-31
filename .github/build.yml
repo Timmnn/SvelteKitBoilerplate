@@ -1,0 +1,16 @@
+name: Build the App (docker-compose)
+
+on:
+   push:
+      branches:
+         - [main]
+
+jobs:
+   build:
+      runs-on: ubuntu-latest
+      steps:
+         - name: Checkout the code
+           uses: actions/checkout@v2.3.4
+
+         - name: Build the app
+           run: docker-compose build
