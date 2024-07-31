@@ -2,8 +2,7 @@ name: Build the App (docker-compose)
 
 on:
    push:
-      branches:
-         - [main]
+      branches: [main]
 
 jobs:
    build:
