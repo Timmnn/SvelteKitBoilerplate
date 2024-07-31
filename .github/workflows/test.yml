@@ -9,7 +9,13 @@ jobs:
       runs-on: ubuntu-latest
       steps:
          - name: Checkout the code
-           uses: actions/checkout@v2.3.4
+           uses: actions/checkout@v4
+
+         - name: Use Bun
+           uses: oven-sh/setup-bun@v2
+
+         - name: Install Dependencies
+           run: (cd frontend && bun install) && (cd backend && bun install)
 
          - name: Test Frontend and Backend
            run: bash ./scripts/test.sh
