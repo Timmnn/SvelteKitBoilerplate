@@ -11,5 +11,8 @@ jobs:
          - name: Checkout the code
            uses: actions/checkout@v2.3.4
 
+         - name: Create Fake .env-File
+           run: touch ./backend/.env
+
          - name: Build the app
            run: docker-compose build
