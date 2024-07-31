@@ -1,0 +1,11 @@
+FROM oven/bun:latest
+
+WORKDIR /app
+
+COPY . .
+
+RUN bun install
+
+# in development run "bun run src/main.ts --watch" in production run "node dist/main.js"
+
+CMD bash -c "if [ \"$NODE_ENV\" = \"production\" ]; then node build; else bun run dev; fi"

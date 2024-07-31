@@ -1,7 +1,3 @@
-(cd frontend && bun install) || exit 1
-(cd backend && bun install) || exit 1
+docker compose down
 
-
-concurrently --kill-others \
-   "cd frontend && bun run dev" \
-   "cd backend && bun run dev"
+docker compose up --build

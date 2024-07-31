@@ -3,19 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "bun src/main.ts --watch"
+    "dev": "bun --watch src/main.ts",
+    "build": "bun build src/main.ts --outdir dist"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@sentry/node": "^8.20.0",
-    "@sentry/profiling-node": "^8.20.0",
     "@types/node": "^22.0.0",
     "dotenv": "^16.4.5",
     "fastify": "^4.28.1",
     "install": "^0.13.0",
     "winston": "^3.13.1",
-    "winston-transport-sentry-node": "^2.8.0"
   }
 }

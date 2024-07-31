@@ -1,13 +1,9 @@
 import Fastify from "fastify";
 import dotenv from "dotenv";
 import logger from "./lib/logger";
-import "./lib/sentry";
-import Sentry from "@sentry/node";
 dotenv.config();
 
 const app = Fastify({});
-
-Sentry.setupFastifyErrorHandler(app);
 
 app.get("/", async (request, reply) => {
    logger.info("Request to /");

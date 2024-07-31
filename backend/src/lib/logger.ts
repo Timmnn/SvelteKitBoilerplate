@@ -1,8 +1,6 @@
 import winston, { format, transports } from "winston";
 const { combine, timestamp, label, printf, prettyPrint, splat, simple } = format;
 
-import SentryTransport from "winston-transport-sentry-node";
-
 const color_map = {
    green: "32",
    red: "31",
@@ -21,14 +19,7 @@ const logger = winston.createLogger({
    level: "info",
    format: winston.format.json(),
    defaultMeta: { service: "user-service" },
-   transports: [
-      new SentryTransport({
-         sentry: {
-            dsn: process.env.SENTRY_DSN,
-            environment: process.env.NODE_ENV,
-         },
-      }),
-   ],
+   transports: [],
 });
 
 //
