@@ -3,3 +3,4 @@
 **/*.log
 **/*.env
 **/!example.env
+backend/database_volume

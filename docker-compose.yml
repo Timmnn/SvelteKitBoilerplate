@@ -15,7 +15,8 @@ services:
       - "traefik.http.routers.frontend.rule=Host(`localhost`)"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
       - "traefik.http.routers.frontend.entrypoints=web"
-
+    volumes:
+      - ./frontend/src:/app/src
     
   backend:
     build: ./backend
@@ -31,6 +32,11 @@ services:
     image: postgres:13
     ports:
       - "5432:5432"
+    volumes:
+      - ./backend/database_volume:/var/lib/postgresql/data
+    env_file:
+      - backend/.env
+
   traefik:
     # The official v3 Traefik docker image
     image: traefik:v3.1
