@@ -2,9 +2,11 @@
   "name": "boilerplate_backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "bun --watch src/main.ts",
-    "build": "bun build src/main.ts --outdir dist"
+    "build": "bun build src/main.ts --outdir dist",
+    "test": "vitest run"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +16,9 @@
     "dotenv": "^16.4.5",
     "fastify": "^4.28.1",
     "install": "^0.13.0",
-    "winston": "^3.13.1",
+    "winston": "^3.13.1"
+  },
+  "devDependencies": {
+    "vitest": "^2.0.5"
   }
 }
