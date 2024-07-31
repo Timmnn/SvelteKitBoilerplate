@@ -18,4 +18,5 @@ All Scripts are located in ./scripts/
 ## Install
 
 1. Create a Sentry Project
+
 2. run `bunx @sentry/wizard@latest -i sourcemaps` in the terminal
