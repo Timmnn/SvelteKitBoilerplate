@@ -6,9 +6,10 @@ COPY . /app
 
 RUN bun install
 
-
 RUN bun run build
 
 ENV  NODE_ENV=dev
 
-CMD bash -c "bun --watch src/main.ts"
+EXPOSE 3001
+
+CMD bash -c "if [ \"$NODE_ENV\" = \"production\" ]; then node dist/main.js; else bun run dev; fi"

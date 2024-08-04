@@ -1,0 +1,1 @@
+cd backend/drizzle && drizzle-kit generate && drizzle-kit migrate
