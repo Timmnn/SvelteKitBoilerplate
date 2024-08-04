@@ -1,19 +1,14 @@
 <script lang="ts">
-   import useClerk from '$lib/useAuth';
-   import { onMount } from 'svelte';
   import type { PageData } from './$types';
-  import {PUBLIC_CLERK_PUBLIC_KEY} from "$env/static/public";
 
   export let data: PageData;
 
-  console.log(PUBLIC_CLERK_PUBLIC_KEY);
+  import {Button} from '$components/ui/button'
+   import SignedIn from 'clerk-sveltekit/client/SignedIn.svelte';
+   import UserButton from 'clerk-sveltekit/client/UserButton.svelte';
+   import SignedOut from 'clerk-sveltekit/client/SignedOut.svelte';
 
-  onMount(async () => {
-    const {clerk, mountSignInOrUserButton} = await useClerk(PUBLIC_CLERK_PUBLIC_KEY);
 
-    mountSignInOrUserButton(document.getElementById('login-form') as HTMLDivElement);
-    
-  });
 </script>
 
 <main class="p-4">
@@ -25,6 +20,40 @@
       <li>{item}</li>
     {/each}
   </ul>
-
   <div id="login-form"></div>
+
+  <div class="outline p-3 rounded">
+    <h2 class="text-2xl font-bold">
+      Auth
+    </h2>
+    <div class="flex gap-3">
+      <Button>
+        <a href="/admin">
+          Go to protected route
+        </a>
+      </Button>
+      <Button>
+        <a href="/sign-in">
+          Sign in
+        </a>
+      </Button>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+  
+      <SignedOut>
+        Not signed in
+      </SignedOut>
+    </div>
+  </div>
+  <div class="outline p-3 rounded">
+    <h2 class="text-2xl font-bold">
+      Payments
+    </h2>
+    <Button>
+      <a href="/checkout">
+        Checkout
+      </a>
+    </Button>
+  </div>
 </main>

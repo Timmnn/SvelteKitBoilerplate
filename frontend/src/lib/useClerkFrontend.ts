@@ -1,6 +1,6 @@
 import { Clerk } from "@clerk/clerk-js";
 
-export default async function useClerk(publicKey: string) {
+export default async function useClerkFrontend(publicKey: string) {
    const clerk = new Clerk(publicKey);
    await clerk.load({});
 
