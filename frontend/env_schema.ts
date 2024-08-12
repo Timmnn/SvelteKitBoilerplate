@@ -3,6 +3,7 @@ import { config } from "dotenv";
 
 export const envSchema = z.object({
    PUBLIC_CLERK_PUBLIC_KEY: z.string().nonempty(),
+   PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().nonempty()
 });
 
 config();
