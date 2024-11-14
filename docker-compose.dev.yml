@@ -1,0 +1,44 @@
+services:
+  frontend:
+    build: ./frontend
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.frontend.rule=PathPrefix(`/`)
+      - traefik.http.routers.frontend.priority=100
+      - traefik.http.services.frontend.loadbalancer.server.port=3000
+      - traefik.http.routers.frontend.entrypoints=web
+    volumes:
+      - './frontend/src:/app/src'
+  backend:
+    build: ./backend
+    volumes:
+      - './backend/src:/app/src'
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.backend.rule=PathPrefix(`/trpc`)
+      - traefik.http.routers.backend.priority=999
+      - traefik.http.services.backend.loadbalancer.server.port=3001
+      - traefik.http.routers.backend.entrypoints=web
+    ports:
+      - '3001:3001'
+  database:
+    image: 'postgres:13'
+    ports:
+      - '5432:5432'
+    volumes:
+      - './backend/database_volume:/var/lib/postgresql/data'
+    env_file:
+      - backend/.env
+  traefik:
+    image: 'traefik:v3.1'
+    command: '--api.insecure=${DEVELOPMENT_ENV} --providers.docker'
+    ports:
+      - '80:80'
+      - '8080:8080'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - './backend/traefik:/etc/traefik'
+  traefik-whoami:
+    image: traefik/whoami
+    labels:
+      - traefik.enable=true

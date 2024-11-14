@@ -7,13 +7,9 @@ services:
       - "traefik.http.routers.frontend.priority=100"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
       - "traefik.http.routers.frontend.entrypoints=web"
-    volumes:
-      - ./frontend/src:/app/src
     
   backend:
     build: ./backend
-    volumes:
-      - ./backend/src:/app/src
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=PathPrefix(`/trpc`)"

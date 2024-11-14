@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "bun --watch src/main.ts",
+    "dev": "yarn --watch src/main.ts",
     "build": "bun build src/main.ts --outdir dist --target=node",
     "test": "vitest run"
   },

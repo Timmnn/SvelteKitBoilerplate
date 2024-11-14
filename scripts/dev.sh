@@ -1,3 +1,7 @@
-docker compose down
+(cd frontend/; yarn)
+(cd backend/; yarn)
 
-docker compose up --build
+
+docker compose -f ./docker-compose.dev.yml down
+
+docker compose -f ./docker-compose.dev.yml up --build

@@ -1,15 +1,13 @@
-FROM oven/bun:latest
+FROM docker.io/jitesoft/node-yarn:latest
 
 WORKDIR /app
 
 COPY . .
 
-RUN bun install
+RUN yarn
 
-RUN apt update && apt install -y curl
-
-RUN bun run build
+RUN yarn run build
 
 RUN export NODE_ENV=dev
 
-CMD bash -c "if [ \"$NODE_ENV\" = \"production\" ]; then node build; else bun run dev; fi"
+CMD bash -c "if [ \"$NODE_ENV\" = \"production\" ]; then node build; else yarn run dev; fi"
