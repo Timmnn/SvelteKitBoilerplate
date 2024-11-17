@@ -1,12 +1,12 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-
-  export let data: PageData;
-
-  import { Button } from "$components/ui/button";
   import SignedIn from "clerk-sveltekit/client/SignedIn.svelte";
   import UserButton from "clerk-sveltekit/client/UserButton.svelte";
   import SignedOut from "clerk-sveltekit/client/SignedOut.svelte";
+
+  import Button from "$components/Button.svelte";
+
+  export let data: PageData;
 </script>
 
 <main class="p-4">
@@ -21,12 +21,12 @@
   <div class="outline p-3 rounded">
     <h2 class="text-2xl font-bold">Auth</h2>
     <div class="flex gap-3">
-      <Button>
+      <button>
         <a href="/admin"> Go to protected route </a>
-      </Button>
-      <Button>
+      </button>
+      <button>
         <a href="/sign-in"> Sign in </a>
-      </Button>
+      </button>
       <SignedIn>
         <UserButton />
       </SignedIn>
@@ -36,9 +36,10 @@
   </div>
   <div class="outline p-3 rounded">
     <h2 class="text-2xl font-bold">Payments</h2>
-    <Button>
+
+    <Button>Button</Button>
+    <button>
       <a href="/checkout"> Checkout </a>
-    </Button>
+    </button>
   </div>
 </main>
-

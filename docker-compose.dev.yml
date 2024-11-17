@@ -3,14 +3,19 @@ services:
     build: ./frontend
     labels:
       - traefik.enable=true
-      - traefik.http.routers.frontend.rule=PathPrefix(`/`)
+      - traefik.http.routers.frontend.rule=PathPrefix(`/`) && !PathPrefix(`/trpc`)
       - traefik.http.routers.frontend.priority=100
       - traefik.http.services.frontend.loadbalancer.server.port=3000
       - traefik.http.routers.frontend.entrypoints=web
     volumes:
+      # Mount the frontend source code
       - './frontend/src:/app/src'
+      - './frontend/static:/app/static'
+      - './frontend/tailwind.config.ts:/app/tailwind.config.ts'
   backend:
     build: ./backend
+    depends_on:
+      - database
     volumes:
       - './backend/src:/app/src'
     labels:

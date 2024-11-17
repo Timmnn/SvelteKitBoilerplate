@@ -1,15 +1,46 @@
-FROM oven/bun:latest
+# Use an official Node.js image
+FROM docker.io/jitesoft/node-yarn:latest
 
+# Set working directory
 WORKDIR /app
 
-COPY . /app
+# Copy only package files first to leverage Docker cache
+COPY package.json yarn.lock ./
 
-RUN bun install
+COPY . .
 
-RUN bun run build
 
-ENV  NODE_ENV=dev
+RUN yarn install && yarn list @trpc/server
 
+RUN npm i -g tsx drizzle-kit drizzle-orm pg
+
+RUN yarn add tsx
+
+
+# Install all dependencies (devDependencies included for build)
+RUN yarn cache clean && yarn install --frozen-lockfile
+
+# Copy the rest of the application
+
+# Build the application
+RUN yarn build
+
+# Set environment variable
+ENV NODE_ENV=dev
+
+
+
+
+#RUN cd drizzle && drizzle-kit generate && drizzle-kit migrate
+
+
+
+
+# Expose application port
 EXPOSE 3001
 
-CMD bash -c "if [ \"$NODE_ENV\" = \"production\" ]; then node dist/main.js; else bun run dev; fi"
+
+
+
+# Start the application based on the environment
+CMD sh -c "if [ \"$NODE_ENV\" = \"production\" ]; then node dist/main.js; else tsx watch src/main.ts; fi"

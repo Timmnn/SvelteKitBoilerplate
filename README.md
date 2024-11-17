@@ -10,6 +10,9 @@
 -  Logging with Winston
 -  Styling with TailwindCSS
 -  Sentry
+-  Auth with Clerk
+-  Development Environment same as Production Environment
+-  Possible to run multiple apps in parallel
 
 ## Usage
 

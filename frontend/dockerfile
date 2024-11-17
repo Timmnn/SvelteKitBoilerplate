@@ -10,4 +10,4 @@ RUN yarn run build
 
 RUN export NODE_ENV=dev
 
-CMD bash -c "if [ \"$NODE_ENV\" = \"production\" ]; then node build; else yarn run dev; fi"
+CMD sh -c "if [ \"$NODE_ENV\" = \"production\" ]; then node build; else yarn run dev; fi"
